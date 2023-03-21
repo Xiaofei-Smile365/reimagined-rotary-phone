@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xml:lang="zh-CN" lang="zh-CN">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="robots" content="nofollow" />
+        <meta name="robots" content="noarchive" />
+        <title>树洞</title>
+        <link rel="shortcut icon" href="/static/img/shudong_logo.png" type="image/x-icon" />
+        <meta content="记录每个人生活的点点滴滴。" name="description"/>
+        <meta http-equiv="Pragma" content="no-cache" />
+        <link href="/static/css/common.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="/static/js/jquery.js"></script>
+        <script>
+            if (window!==top){
+                alert("请直接通过域名(https://shudong.com)访问树洞");
+                top.location.href = window.location.href;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <div class="container">
+                <div class="span-10">
+                    <span><a class="header_w" href="/">首页</a></span>
+                    <span><a class="header_w" href="/home">我的主页</a></span>
+                </div>
+                <div class="prepend-9 span-5 last" style="text-align: right;">
+                    <a style="font-weight:bold;" class="header_w" href="/add">写日记</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="main_left">
+                <h2 id="diarys_title" class="mt-10 mb-10">最近发表的日记</h2>
+                <div id="diarys_body" style="position:absolute; width:570px; height:430px; overflow:auto">
+                    {% if latest_diary_list %}
+                        <ul>
+                        {% for key, value in latest_diary_list.items %}
+                            <div class="index_list">
+                                <div class="date"><span>{{ key |slice:"2"}}</span>{{  key |slice:"2:4" }}</div>
+                                <div class="days">
+                                    {% for key, value in value.items %}
+                                        <div class="note_time">{{ key |slice:"2"}}:{{  key |slice:"2:4" }}</div>
+                                        <div class="note_content">{{ value }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>这个月没有日记哦～</p>
+                    {% endif %}
+                </div>
+                <div class="page_bar"></div>
+            </div>
+            <div class="siderbar_right">
+                <div>
+                    <div class="calendar_title">
+                        <span class="calendar_month"><a href="#" onclick="prev_month()">&lt; </a><span id="month"></span>月<a href="#" onclick="next_month()"> &gt;</a></span>
+                        <span class="calendar_year"><a href="#" onclick="prev_year()">&lt;&lt; </a><span id="year"></span><a href="#" onclick="next_year()"> &gt;&gt;</a></span>
+                    </div>
+                    <table id="calendar_body" class="calendar">
+                        <script type="text/javascript" src="/static/js/calendar.js"></script>
+                    </table>
+                </div>
+                <div style="margin-top: 30px;">
+                    <span style="color: #808080;">记录每个人生活的点点滴滴。</span>
+                    <a href="/">
+                    <img style="width: 215px; height: 215px; margin-left: -15px;" src="/static/img/diary.png" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer container">
+            <hr class="hr-10">
+            <div class="copyright span-6 append-9">
+                &copy;2023-2050 树洞 <a href="https://shudong.com">shudong.com</a>
+            </div>
+
+            <div class="prepend-4 span-5 last">
+                <a href="/admin">&spar;关于树洞</a>
+            </div>
+        </div>
+    </body>
+</html>

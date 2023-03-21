@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="robots" content="nofollow" />
         <meta name="robots" content="noarchive" />
-        <title>写日记</title>
+        <title>Smile</title>
         <link rel="shortcut icon" href="/static/img/shudong_logo.png" type="image/x-icon" />
         <meta content="记录每个人生活的点点滴滴。" name="description"/>
         <meta http-equiv="Pragma" content="no-cache" />
@@ -30,15 +30,34 @@
             </div>
         </div>
 
-        <div class="container">
-            <p class="note_tip">{{ date_today }}&nbsp;&nbsp;&nbsp;{{ week_today }}</p>
-            <form method="post" id="note_form">
-                {% csrf_token %}
-                <label for="note_content"></label><textarea onpaste="return false" class="note_add" id="note_content" name="content"></textarea>
-                <div>
-                    <button type="submit" id="node_add" class="submit_button">写好了</button>
+        <meta name="robots" content="none" />
+
+        <div class="container main">
+            <div class="siderbar_left">
+                <div class="img_shadow" style="padding-top: 4px;">
+                    <a href="/">
+                        <img src="/static/img/diary.png" alt="Smile" width="300px" />
+                    </a>
                 </div>
-            </form>
+                <div class="quote"><span>还没活明白的小白</span></div>
+            </div>
+            <div class="main_right">
+                <div style="color:#909090; margin-bottom:15px;border-bottom: 2px #8FA5AB solid; height: 22px;">
+                    <span style="font-size: 16px; line-height: 20px;">{{ date_today }}&nbsp;&nbsp;&nbsp;{{ week_today }}</span>
+                    <span style="font-size: 14px; float: right;"><img src="/static/img/flower-16.png"  alt=""/> × {{ diary_sum }}</span>
+                </div>
+                {% if diary_body_today %}
+                    <div class="note_each" style="position:absolute; width:510px; height:300px; overflow:auto">
+                        {% for key, value in diary_body_today.items %}
+                            <div class="note_time">{{ key |slice:"2"}}:{{  key |slice:"2:4" }}</div>
+                            <div class="note_content">{{ value }}</div>
+                            <div class="note_username">-- Smile</div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>今天还没写日记哦！<a href="/add">去写日记～</a></p>
+                {% endif %}
+            </div>
         </div>
 
         <div class="footer container">
